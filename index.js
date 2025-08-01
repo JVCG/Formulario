@@ -5,12 +5,19 @@ const loginRoutes = require('./routes/login');
 const leadsRoutes = require('./routes/leads');
 
 const app = express();
-const PORT = 3001;
+//const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
-app.use(cors({
+/*app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
-}));
+}));*/
+
+const corsOptions = {
+  origin: process.env.FRONTEND_ORIGIN || 'http://localhost:5173',
+  credentials: true
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(session({
   secret: 'clave_secreta_segura',
