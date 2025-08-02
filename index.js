@@ -31,10 +31,20 @@ app.use(cors({
 }));
 //app.use(cors(corsOptions));
 app.use(express.json());
-app.use(session({
+/*app.use(session({
   secret: 'clave_secreta_segura',
   resave: false,
   saveUninitialized: true
+}));*/
+
+app.use(session({
+  secret: 'clave_secreta_segura',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    sameSite: 'none', // ⚠️ para permitir cookies cross-site
+    secure: true      // ⚠️ requerido para HTTPS (Render lo usa)
+  }
 }));
 
 app.use('/api/login', loginRoutes);
