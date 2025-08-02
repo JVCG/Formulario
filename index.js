@@ -29,7 +29,7 @@ app.use(cors({
   },
   credentials: true
 }));
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 app.use(express.json());
 app.use(session({
   secret: 'clave_secreta_segura',
