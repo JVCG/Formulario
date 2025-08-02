@@ -13,10 +13,22 @@ const PORT = process.env.PORT || 3001;
   credentials: true
 }));*/
 
-const corsOptions = {
+/*const corsOptions = {
   origin: process.env.FRONTEND_ORIGIN || 'http://localhost:5173',
   credentials: true
-};
+};*/
+const allowedOrigins = ['http://localhost:5173', 'https://jvbusinessconsulting.izipetperu.com']; // <--- coloca aquí tu dominio real
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Origen no permitido por CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(session({
