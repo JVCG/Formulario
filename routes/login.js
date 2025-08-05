@@ -21,7 +21,7 @@ const router = express.Router();
 router.post('/', (req, res) => {
   const { password } = req.body;
 
-  if (password === "Mikael1219") {
+  if (password === process.env.ADMIN_PASSWORD) {
     const token = jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token });
   } else {
