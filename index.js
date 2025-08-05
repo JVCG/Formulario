@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const session = require('express-session');
+//const session = require('express-session');
 const loginRoutes = require('./routes/login');
 const leadsRoutes = require('./routes/leads');
 
@@ -37,7 +37,7 @@ app.use(express.json());
   saveUninitialized: true
 }));*/
 
-app.use(session({
+/*app.use(session({
   secret: 'clave_secreta_segura',
   resave: false,
   saveUninitialized: false,
@@ -45,7 +45,7 @@ app.use(session({
     sameSite: 'none', // ⚠️ para permitir cookies cross-site
     secure: true      // ⚠️ requerido para HTTPS (Render lo usa)
   }
-}));
+}));*/
 
 app.use('/api/login', loginRoutes);
 app.use('/api/leads', leadsRoutes);
