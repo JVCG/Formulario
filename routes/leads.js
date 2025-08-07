@@ -45,8 +45,15 @@ router.post('/', async (req, res) => {
 
 router.get('/', requireAuth, async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM leads ORDER BY createdAt DESC');
-    res.status(200).json(rows);
+    /*const [rows] = await pool.query('SELECT * FROM leads ORDER BY createdAt DESC');
+    res.status(200).json(rows);*/
+	const [rows] = await pool.query('SELECT * FROM leads ORDER BY createdAt DESC');
+	const parsedRows = rows.map(row => ({
+	  ...row,
+	  goals: JSON.parse(row.goals)
+	}));
+	res.json(parsedRows);
+	
   } catch (error) {
     console.error('Error al obtener leads:', error);
     res.status(500).json({ message: 'Error interno del servidor' });
